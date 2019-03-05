@@ -1,0 +1,29 @@
+body {
+  background: #ccc;
+}
+
+.dial {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  background: #ececec;
+  border-radius: 50%;
+  margin: 8% auto 0;
+  box-shadow: 1px 14px 21px 0 rgba(0,0,0,.2);
+}
+
+span {
+  display: inline-block;
+}
+
+/* TODO : Switch to SVG */
+
+.dialLine {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  margin-left: -1px;
+  width: 2px;
+  z-index: 1;
+  transform-origin: 50% 160px;
+}
