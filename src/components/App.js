@@ -7,7 +7,7 @@ class App extends React.Component {
         seconds : new Date().getSeconds(),
         minutes: new Date().getMinutes(),
         hours: new Date().getHours(),
-        color: 0x0
+        colors: {}
     };
 
     componentDidMount() {
@@ -15,7 +15,7 @@ class App extends React.Component {
             seconds: new Date().getSeconds(),
             minutes: new Date().getMinutes(),
             hours: new Date().getHours(),
-            color: this.getHexColor()
+            colors: this.getHexColor()
         }), 1000);
     }
 
@@ -24,23 +24,26 @@ class App extends React.Component {
     }
 
     getHexColor() {
-        // TOD0 : Get hex color based on time and date
-    }
 
-    updateHexColor(updatedColor) {
-        let color = {...this.state.color};
-        color = updatedColor;
-        this.setState({color});
+        let colors = {
+            colorSeconds: `#${Math.floor(Date.now()/1000 - this.state.hours * 3600 - this.state.minutes * 60 - this.state.seconds).toString(16).slice(-6)}`,
+            colorMinutes: `#${Math.floor(Date.now()/1000 - this.state.hours * 3600 - this.state.minutes * 60).toString(16).slice(-6)}`,
+            colorHours: `#${Math.floor(Date.now()/1000 - this.state.hours * 3600).toString(16).slice(-6)}`,
+            colorDialBorder: `#${Math.floor(Date.now()/1000).toString(16).slice(-6)}`,
+        };
+
+        return colors;
     }
 
     render() {
-        
+
         return (
-            <div className="dial" style={{border: `6px solid #515151`}}>
+            <div className="dial" style={{border: `6px solid ${this.state.colors.colorDialBorder}`}}>
                 <DialLines
                     seconds = {this.state.seconds}
                     minutes = {this.state.minutes}
                     hours = {this.state.hours}
+                    colors = {this.state.colors}
                 />
             </div>
         );
